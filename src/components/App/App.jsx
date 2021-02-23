@@ -1,24 +1,18 @@
 import React, { useEffect } from 'react';
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch,
-} from 'react-router-dom';
-
+import { HashRouter as Router, Route, Redirect, Switch,} 
+from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import IngredientsPage from '../IngredientsPage/IngredientsPage';
+import RecipePage from '../RecipesPage/RecipesPage'
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import RecipeDetails from '../RecipeDetails/RecipeDetails'
 
 import './App.css';
 
@@ -59,12 +53,27 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/userIngredients"
           >
-            <InfoPage />
+            <IngredientsPage />
           </ProtectedRoute>
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows RegisterPage at "/registration"
+            exact
+            path="/recipes"
+          >
+            <RecipePage />
+          </ProtectedRoute>
+          <ProtectedRoute
+            exact
+            path="/details"
+          >
+            <RecipeDetails />
+          </ProtectedRoute>
+          
 
           {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
