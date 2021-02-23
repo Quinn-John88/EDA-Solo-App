@@ -1,0 +1,5 @@
+.recipeCard {
+    border: 1px solid black;
+    max-width: 300px;
+    margin: 5px;
+}
