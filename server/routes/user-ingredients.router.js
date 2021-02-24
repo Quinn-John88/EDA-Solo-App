@@ -7,19 +7,12 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const query = `
-    SELECT "ingredients"."id","ingredients"."name","ingredient_user"."count" FROM "ingredient_user"
+    SELECT "ingredients"."id","ingredients"."name","ingredients"."category_id","ingredient_user"."count" FROM "ingredient_user"
     JOIN "ingredients" ON "ingredient_user"."ingredient_id"="ingredients"."id"
     WHERE "user_id"=$1;`
   pool.query(query, [req.user.id]).then(result => {
-    const userIngredients = result.rows
-    const catergoryName = `
-      SELECT "categories"."name" FROM "categories"
-      JOIN "ingredients" ON "ingredients"."category_id"="categories"."id"
-      JOIN "ingredient_user" ON "ingredient_user"."ingredient_id"="ingredients"."id";
-      `
-    pool.query(catergoryName).then(result => {
-      res.status(200).send(userIngredients);
-    })
+    console.log(result.rows);
+    res.send(result.rows);
   }).catch(err => {
     res.sendStatus(500)
   })

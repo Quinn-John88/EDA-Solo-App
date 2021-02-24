@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function IngredientRow({ ingredient }) {
@@ -10,6 +10,35 @@ function IngredientRow({ ingredient }) {
     const [isEditing, setIsEditing] = useState(false)
 
     const [count, setCount] = useState(ingredient.count)
+
+    let IngredientCategory = ingredient.category_id;
+
+    const categorySet = () => {
+
+        if (IngredientCategory = 1 ) {
+            IngredientCategory = "Fruit"; 
+        } else if (IngredientCategory = 2) {
+            IngredientCategory = "Vegetable";
+        } else if (IngredientCategory = 3) {
+            IngredientCategory = "Grain";
+        } else if (IngredientCategory = 4) {
+            IngredientCategory = "Protien";
+        } else if (IngredientCategory = 5) {
+            IngredientCategory = "Dairy";
+        } else if (IngredientCategory = 6) {
+            IngredientCategory = "Spice";
+        } else if (IngredientCategory = 7) {
+            IngredientCategory = "Sauce";
+        } else if (IngredientCategory = 8) {
+            IngredientCategory = "Seasoning";
+        } else if (IngredientCategory = 9) {
+            IngredientCategory = "Additive";
+        } else {
+            IngredientCategory = "Soups";
+        }
+        console.log(IngredientCategory)
+    }
+
 
     const handleDelete = (id) => {
         //delete ingredient
@@ -29,11 +58,11 @@ function IngredientRow({ ingredient }) {
         }
         dispatch({ type: 'UPDATE_INGREDIENT', payload: countObj })
     }
-
+    categorySet();
     return (
         <tr key={ingredient.id}>
             <td>{ingredient.name}</td>
-            <td>{ingredient.categoryName}</td>
+            <td>{IngredientCategory}</td>
             <td>{ingredient.count}</td>
             {!isEditing ?
                 <td><button onClick={handleEdit}>Edit</button><button onClick={() => handleDelete(ingredient.id)}>Delete</button></td> :
