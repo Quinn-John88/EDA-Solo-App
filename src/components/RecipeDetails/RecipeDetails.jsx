@@ -5,8 +5,8 @@ import { useHistory } from 'react-router-dom'
 function MovieDetails() {
 
     const history = useHistory();
-    const recipe = useSelector(store => store.recipes);
-    console.log(recipe.id);
+    const recipe = useSelector(store => store.details);
+    console.log(recipe);
     return (
         <>
             <button onClick={() => history.push('/recipes')}>Back to List</button>

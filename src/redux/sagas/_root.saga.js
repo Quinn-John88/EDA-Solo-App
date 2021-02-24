@@ -1,10 +1,13 @@
 import { all } from 'redux-saga/effects';
-import loginSaga from './login.saga';
-import registrationSaga from './registration.saga';
-import userSaga from './user.saga';
-import ingredientSaga from './userIngredients.saga'
-import RecipeSaga from './recipes.saga'
-import ingredientSelectSaga from './allIngredients.saga'
+import loginSaga from './AuthentSagas/login.saga';
+import registrationSaga from './AuthentSagas/registration.saga';
+import userSaga from './AuthentSagas/user.saga';
+import ingredientSaga from './IngredientsSagas/userIngredients.saga'
+import RecipeSaga from './RecipesSagas/recipes.saga'
+import ingredientSelectSaga from './IngredientsSagas/allIngredients.saga'
+import addIngredientSaga from './IngredientsSagas/addIngredient.saga';
+import deleteIngredientSaga from './IngredientsSagas/deleteIngredient.saga'
+import categorySaga from './IngredientsSagas/ingredient-categories.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +24,8 @@ export default function* rootSaga() {
     ingredientSaga(),
     RecipeSaga(),
     ingredientSelectSaga(),
+    addIngredientSaga(),
+    deleteIngredientSaga(),
+    categorySaga(),
   ]);
 }

@@ -12,7 +12,7 @@ function RecipesPage() {
         dispatch({ type: 'FETCH_RECIPES' });
     }, [])
     const handleClick = (recipe) => {
-        dispatch({ type: 'SET_DETAILS', payload: recipe.id });
+        dispatch({ type: 'SET_DETAILS', payload: recipe });
         history.push('/details')
     }
 
