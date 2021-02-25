@@ -30,7 +30,7 @@ function IngredientsPage() {
             <th>Name</th>
             <th>Category</th>
             <th>Count</th>
-            <th>Controls</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
