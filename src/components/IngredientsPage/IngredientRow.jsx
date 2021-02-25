@@ -3,35 +3,34 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function IngredientRow({ ingredient }) {
 
-    const users = useSelector(store => store.user)
-    //const [isEditing, setIsEditing] = useState(false);
+    const users = useSelector(store => store.user);
+
     const dispatch = useDispatch();
 
-    const [isEditing, setIsEditing] = useState(false)
+    const [isEditing, setIsEditing] = useState(false);
 
-    const [count, setCount] = useState(ingredient.count)
+    const [count, setCount] = useState(ingredient.count);
 
     let IngredientCategory = ingredient.category_id;
 
     const categorySet = () => {
-
-        if (IngredientCategory = 1 ) {
-            IngredientCategory = "Fruit"; 
-        } else if (IngredientCategory = 2) {
+        if (IngredientCategory === 1) {
+            IngredientCategory = "Fruit";
+        } else if (IngredientCategory === 2) {
             IngredientCategory = "Vegetable";
-        } else if (IngredientCategory = 3) {
+        } else if (IngredientCategory === 3) {
             IngredientCategory = "Grain";
-        } else if (IngredientCategory = 4) {
+        } else if (IngredientCategory === 4) {
             IngredientCategory = "Protien";
-        } else if (IngredientCategory = 5) {
+        } else if (IngredientCategory === 5) {
             IngredientCategory = "Dairy";
-        } else if (IngredientCategory = 6) {
+        } else if (IngredientCategory === 6) {
             IngredientCategory = "Spice";
-        } else if (IngredientCategory = 7) {
+        } else if (IngredientCategory === 7) {
             IngredientCategory = "Sauce";
-        } else if (IngredientCategory = 8) {
+        } else if (IngredientCategory === 8) {
             IngredientCategory = "Seasoning";
-        } else if (IngredientCategory = 9) {
+        } else if (IngredientCategory === 9) {
             IngredientCategory = "Additive";
         } else {
             IngredientCategory = "Soups";
@@ -39,6 +38,7 @@ function IngredientRow({ ingredient }) {
         console.log(IngredientCategory)
     }
 
+    categorySet(IngredientCategory);
 
     const handleDelete = (id) => {
         //delete ingredient
@@ -58,7 +58,6 @@ function IngredientRow({ ingredient }) {
         }
         dispatch({ type: 'UPDATE_INGREDIENT', payload: countObj })
     }
-    categorySet();
     return (
         <tr key={ingredient.id}>
             <td>{ingredient.name}</td>
