@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
+import Card from '@material-ui/core/Card';
 import '../RecipesPage/RecipePage.css'
 
 function RecipesPage() {
@@ -17,13 +18,13 @@ function RecipesPage() {
     }
 
     return (
-        <div className="container">
+        <div className="recipeContainer">
             {recipes.map(recipe => {
                 return (
-                    <div className='recipeCard' key={recipe.id} onClick={() => handleClick(recipe)}>
-                        <h4>{recipe.title}</h4>
-                            <p>{recipe.description}</p> 
-                    </div>
+                    <Card className='recipeCard' key={recipe.id} onClick={() => handleClick(recipe)}>
+                            <img style={{ width: 100, height: 100 }} src={recipe.poster}></img>
+                            <h5 style={{maxWidth:100}}>{recipe.title}</h5>
+                    </Card>
                 )
             })}
         </div>

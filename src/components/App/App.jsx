@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Redirect, Switch,} from 'react-router-dom';
+import { useHistory, HashRouter as Router, Route, Redirect, Switch,} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -12,6 +12,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RecipeDetails from '../RecipeDetails/RecipeDetails'
+
 
 import './App.css';
 

@@ -1,55 +1,9 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import LogOutButton from '../LogOutButton/LogOutButton';
-// import './Nav.css';
-// import { useSelector } from 'react-redux';
-
-// function Nav() {
-//   const user = useSelector((store) => store.user);
-
-//   let loginLinkData = {
-//     path: '/login',
-//     text: 'Login / Register',
-//   };
-
-//   if (user.id != null) {
-//     loginLinkData.path = '/user';
-//     loginLinkData.text = 'Home';
-//   }
-
-//   return (
-//     <div className="nav">
-//       <Link to="/home">
-//         <h2 className="nav-title">Prime Solo Project</h2>
-//       </Link>
-//       <div>
-//         <Link className="navLink" to={loginLinkData.path}>
-//           {loginLinkData.text}
-//         </Link>
-//         <Link className="navLink" to="/about">
-//           About
-//         </Link>
-//         {user.id && (
-//           <>
-//             <Link className="navLink" to="/userIngredients">
-//               Ingredients
-//             </Link>
-//             <Link className='navLink' to="recipes">
-//               Cookable Recipes
-//             </Link>
-//             <LogOutButton className="navLink" />
-//           </>
-//         )}
-
-//       </div>
-//     </div>
-//   );
-// }
 import { React, useState } from 'react'
 import clsx from 'clsx';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import { useHistory } from 'react-router-dom';
 import './Nav.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -70,13 +24,12 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import KitchenIcon from '@material-ui/icons/Kitchen';
 import HelpIcon from '@material-ui/icons/Help';
 import List from '@material-ui/core/List';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 
 function Nav() {
   const user = useSelector((store) => store.user);
-  const dispatch = useDispatch();
+
   const history = useHistory();
 
   function hanldeRecipeClick() {
@@ -94,11 +47,10 @@ function Nav() {
   function handleClickHome() {
     history.push('/home')
   }
-  function handleLogout() {
+  function handleAccountClick() {
     history.push('/user')
-    dispatch({ type: 'LOGOUT'});
-    handleDrawerClose();
   }
+
   let loginLinkData = {
     path: '/login',
     text: 'Login / Register',
@@ -199,14 +151,15 @@ function Nav() {
           >
             <MenuIcon />
           </IconButton>
+          <Button color='inherit'>
+            <Typography onClick={handleClickHome} >Home Cook Helper</Typography>
+          </Button>
           <IconButton
-            edge="start"
             color='inherit'
-            onClick={handleClickHome}
+            onClick={console.log('click')}
           >
-            <HomeIcon/>
+            <AccountCircleIcon onClick={handleAccountClick}/>
           </IconButton>
-            <Typography>Home Cook Helper</Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -233,9 +186,6 @@ function Nav() {
           </ListItem>
           <ListItem button onClick={handleAboutClick} >
             <ListItemIcon><HelpIcon /><ListItemText primary='About' /></ListItemIcon>
-          </ListItem>
-          <ListItem button onClick={handleLogout}>
-            <ListItemIcon><ExitToAppIcon/><ListItemText primary='Logout'/></ListItemIcon>
           </ListItem>
         </List>
       </Drawer>
