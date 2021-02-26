@@ -1,5 +1,13 @@
 import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TextField from '@material-ui/core/TextField';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CreateIcon from '@material-ui/icons/Create';
+import IconButton from '@material-ui/core/IconButton';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import '../IngredientsPage/Ingredients.css'
 
 function IngredientRow({ ingredient }) {
 
@@ -59,15 +67,15 @@ function IngredientRow({ ingredient }) {
         dispatch({ type: 'UPDATE_INGREDIENT', payload: countObj })
     }
     return (
-        <tr key={ingredient.id}>
-            <td>{ingredient.name}</td>
-            <td>{IngredientCategory}</td>
-            <td>{ingredient.count}</td>
+        <TableRow key={ingredient.id}>
+            <TableCell align="center">{ingredient.name}</TableCell>
+            <TableCell align="center">{IngredientCategory}</TableCell>
+            <TableCell align="center">{ingredient.count}</TableCell>
             {!isEditing ?
-                <td><button onClick={handleEdit}>Edit</button><button onClick={() => handleDelete(ingredient.id)}>Delete</button></td> :
-                <td><input value={count} onChange={(e) => setCount(e.target.value)} /><button onClick={editSubmit}>Save</button></td>
+                <TableCell align="center"><IconButton className='ingredientButtonControls' variant="contained" color="default" onClick={handleEdit}><CreateIcon/></IconButton><IconButton className='ingredientButtonControls' variant="contained" color="secondary" onClick={() => handleDelete(ingredient.id)}><DeleteForeverIcon/></IconButton></TableCell> :
+                <TableCell align="center"><TextField className="ingredientEditText" variant="outlined" label='Count' value={count} onChange={(e) => setCount(e.target.value)} /><IconButton className='ingredientSaveButton' variant="contained" color="primary" onClick={editSubmit}><SaveAltIcon/></IconButton></TableCell>
             }
-        </tr>
+        </TableRow>
     )
 }
 export default IngredientRow;

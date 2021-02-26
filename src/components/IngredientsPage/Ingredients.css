@@ -1,0 +1,28 @@
+.ingredientForm {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.ingredientsTable {
+    text-align: center;
+    margin: 1%;
+}
+
+.Ingredientcontainer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredientButtonControls {
+    width:20px;
+    height: 30px;
+    margin-left: 2px;
+}
+.ingredientSaveButton {
+    height: 30px;
+    width: 20px;
+}
+.ingredientEditText {
+    width: 150px;
+}
