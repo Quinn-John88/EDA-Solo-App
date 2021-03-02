@@ -1,0 +1,9 @@
+.recipeDetailsImage {
+    border: 2px solid black;
+    border-radius: 4px;
+}
+.recipeDetails {
+    text-align: center;
+    padding-left: 20%;
+    padding-right: 20%;
+}

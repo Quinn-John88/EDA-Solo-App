@@ -9,7 +9,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   const query = `
     SELECT "ingredients"."id","ingredients"."name","ingredients"."category_id","ingredient_user"."count" FROM "ingredient_user"
     JOIN "ingredients" ON "ingredient_user"."ingredient_id"="ingredients"."id"
-    WHERE "user_id"=$1;`
+    WHERE "user_id"=$1 ORDER BY "ingredients"."name";`
   pool.query(query, [req.user.id]).then(result => {
     console.log(result.rows);
     res.send(result.rows);

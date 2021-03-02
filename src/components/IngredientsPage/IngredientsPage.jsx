@@ -37,6 +37,7 @@ function IngredientsPage() {
               <TableCell align="center">Name</TableCell>
               <TableCell align="center">Category</TableCell>
               <TableCell align="center">Count</TableCell>
+              <TableCell/>
             </TableRow>
           </TableHead>
           <TableBody>

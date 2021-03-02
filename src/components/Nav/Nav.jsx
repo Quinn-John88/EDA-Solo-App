@@ -72,6 +72,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import List from '@material-ui/core/List';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 
 function Nav() {
@@ -85,6 +86,10 @@ function Nav() {
   }
   function handleIngredientClick() {
     history.push('/userIngredients')
+    handleDrawerClose();
+  }
+  function handleFavoriteClick() {
+    history.push('/favorites')
     handleDrawerClose();
   }
   function handleAboutClick() {
@@ -231,11 +236,14 @@ function Nav() {
           <ListItem button onClick={handleIngredientClick}>
             <ListItemIcon><KitchenIcon /><ListItemText primary='Ingredients' /></ListItemIcon>
           </ListItem>
+          <ListItem button onClick={handleFavoriteClick}  >
+            <ListItemIcon><FavoriteIcon/><ListItemText primary='Favorites' /></ListItemIcon>
+          </ListItem>
           <ListItem button onClick={handleAboutClick} >
             <ListItemIcon><HelpIcon /><ListItemText primary='About' /></ListItemIcon>
           </ListItem>
           <ListItem button onClick={handleLogout}>
-            <ListItemIcon><ExitToAppIcon/><ListItemText primary='Logout'/></ListItemIcon>
+            <ListItemIcon><ExitToAppIcon/><ListItemText primary='Login/Logout'/></ListItemIcon>
           </ListItem>
         </List>
       </Drawer>

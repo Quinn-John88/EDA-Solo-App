@@ -2,10 +2,11 @@ import { React, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import SendIcon from '@material-ui/icons/Send';
 import Box from '@material-ui/core/Box';
-
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 import '../IngredientsPage/Ingredients.css'
 
 function IngredientForm() {
@@ -14,7 +15,7 @@ function IngredientForm() {
 
     const allIngredients = useSelector(store => store.allIngredients);
 
-    const [newIngredient, setnewIngredient] = useState('');
+    const [newIngredient, setNewIngredient] = useState(0);
 
     const [newIngredientCount, setNewIngredientCount] = useState('');
 
@@ -32,7 +33,7 @@ function IngredientForm() {
             return;
         } else {
             dispatch({ type: 'ADD_INGREDIENT', payload: newIngredientAdd });
-            setnewIngredient('');
+            setNewIngredient('');
             setNewIngredientCount('')
         }
     }
@@ -41,16 +42,18 @@ function IngredientForm() {
     return (
         <form className="ingredientForm">
             <Box display="flex" justifyContent="center">
-                <Autocomplete
+                <Select
                     value={newIngredient}
-                    onChange={(e) => setnewIngredient(e.target.value)}
-                    options={allIngredients}
-                    getOptionLabel={(option) => option.name}
-                    style={{ width: 200, marginRight: 5 }}
-                    renderInput={(params) => <TextField {...params} label="Ingredient" variant="outlined" />}
-                />
+                    onChange={(e) => setNewIngredient(e.target.value)}
+                    variant="outlined"
+                    style={{width:200,marginRight:5}}
+                    defaultValue={0}
+                >
+                    <InputLabel value={0}>Ingredient Name</InputLabel>
+                    {allIngredients.map((eachIngredient, i) => <MenuItem key={i} value={eachIngredient.id}>{eachIngredient.name}</MenuItem>)}
+                </Select>
                 <TextField style={{ width: 200, marginRight: 5, height: 50 }} id="countInput" variant="outlined" label="Count" value={newIngredientCount} onChange={(e) => setNewIngredientCount(e.target.value)} />
-                <Button style={{ width: 100, height: 55}} variant="contained" color="primary" onClick={handleSubmit}>Add<SendIcon style={{margin:10}}/></Button>
+                <Button style={{ width: 100, height: 55 }} variant="contained" color="primary" onClick={handleSubmit}>Add<SendIcon style={{ margin: 10 }} /></Button>
             </Box>
         </form>
     )

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory, HashRouter as Router, Route, Redirect, Switch,} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
@@ -12,9 +11,11 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import RecipeDetails from '../RecipeDetails/RecipeDetails'
+import FavoriteRecipeList from '../FavoriteRecipes/FavoriteRecipes'
 
 
 import './App.css';
+import favoriteRecipes from '../../redux/reducers/favorite-recipes.reducer';
 
 function App() {
   const dispatch = useDispatch();
@@ -73,6 +74,15 @@ function App() {
           >
             <RecipeDetails />
           </ProtectedRoute>
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to "/user"
+            // - else shows RegisterPage at "/registration"
+            exact
+            path="/favorites"
+          >
+            <FavoriteRecipeList />
+          </ProtectedRoute>
           
 
           {/* When a value is supplied for the authRedirect prop the user will
@@ -116,7 +126,6 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <Footer />
       </div>
     </Router>
   );
