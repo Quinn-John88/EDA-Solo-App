@@ -26,8 +26,8 @@ function RecipesPage() {
                         <Card className='recipeCard' key={recipe.id} onClick={() => handleClick(recipe)}>
                             <img style={{ width: 100, height: 100 }} src={recipe.poster}></img>
                             <h5 style={{ maxWidth: 100 }}>{recipe.title}</h5>
-                            <IconButton onClick={() => dispatch({ type: 'ADD_FAVORITE', payload: recipe.id })}><FavoriteIcon /></IconButton>
                         </Card>
+                        <IconButton style={{ textAlign: "left" }} onClick={() => dispatch({ type: 'ADD_FAVORITE', payload: recipe.id })}><FavoriteIcon /></IconButton>
                     </>
                 )
             })}
