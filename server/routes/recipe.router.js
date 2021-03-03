@@ -19,6 +19,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.send(result.rows)
     }).catch(err => {
         res.sendStatus(500)
+        
     })
 });
 
