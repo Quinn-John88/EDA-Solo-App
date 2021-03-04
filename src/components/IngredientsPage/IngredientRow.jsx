@@ -7,6 +7,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CreateIcon from '@material-ui/icons/Create';
 import IconButton from '@material-ui/core/IconButton';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import Swal from 'sweetalert2'
 import '../IngredientsPage/Ingredients.css'
 
 function IngredientRow({ ingredient }) {
@@ -43,14 +44,30 @@ function IngredientRow({ ingredient }) {
         } else {
             IngredientCategory = "Soups";
         }
-        console.log(IngredientCategory)
     }
 
     categorySet(IngredientCategory);
 
     const handleDelete = (id) => {
         //delete ingredient
-        dispatch({ type: 'DELETE_INGREDIENT', payload: id });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch({ type: 'DELETE_INGREDIENT', payload: id });
+                Swal.fire(
+                    'Deleted!',
+                    'Ingredient deleted.',
+                    'success'
+                )
+            }
+        })
     }
 
     const handleEdit = () => {
@@ -64,16 +81,23 @@ function IngredientRow({ ingredient }) {
             count: count,
             user_id: users.id,
         }
+        Swal.fire({
+            icon: 'success',
+            title: 'Saved!',
+            showConfirmButton: false,
+            timer: 1500
+        })
         dispatch({ type: 'UPDATE_INGREDIENT', payload: countObj })
     }
+
     return (
         <TableRow key={ingredient.id}>
             <TableCell align="center">{ingredient.name}</TableCell>
             <TableCell align="center">{IngredientCategory}</TableCell>
             <TableCell align="center">{ingredient.count}</TableCell>
             {!isEditing ?
-                <TableCell align="center"><IconButton className='ingredientButtonControls' variant="contained" color="default" onClick={handleEdit}><CreateIcon/></IconButton><IconButton className='ingredientButtonControls' variant="contained" color="secondary" onClick={() => handleDelete(ingredient.id)}><DeleteForeverIcon/></IconButton></TableCell> :
-                <TableCell align="center"><TextField className="ingredientEditText" variant="outlined" label='Count' value={count} onChange={(e) => setCount(e.target.value)} /><IconButton className='ingredientSaveButton' variant="contained" color="primary" onClick={editSubmit}><SaveAltIcon/></IconButton></TableCell>
+                <TableCell align="center"><IconButton className='ingredientButtonControls' variant="contained" color="default" onClick={handleEdit}><CreateIcon /></IconButton><IconButton className='ingredientButtonControls' variant="contained" color="secondary" onClick={() => handleDelete(ingredient.id)}><DeleteForeverIcon /></IconButton></TableCell> :
+                <TableCell align="center"><TextField className="ingredientEditText" variant="outlined" label='Count' value={count} onChange={(e) => setCount(e.target.value)} /><IconButton className='ingredientSaveButton' variant="contained" color="primary" onClick={editSubmit}><SaveAltIcon /></IconButton></TableCell>
             }
         </TableRow>
     )

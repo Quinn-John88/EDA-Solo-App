@@ -7,9 +7,10 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   const query = `
-    SELECT "ingredients"."id","ingredients"."name","ingredients"."category_id","ingredient_user"."count" FROM "ingredient_user"
+    SELECT "ingredients"."id","ingredients"."name", "ingredients"."category_id", "count" FROM "ingredient_user"
     JOIN "ingredients" ON "ingredient_user"."ingredient_id"="ingredients"."id"
-    WHERE "user_id"=$1 ORDER BY "ingredients"."name";`
+    WHERE "user_id"=$1;
+  `
   pool.query(query, [req.user.id]).then(result => {
     console.log(result.rows);
     res.send(result.rows);
@@ -21,22 +22,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const query = `
   DELETE FROM "ingredient_user"
-  WHERE "ingredient_id"=$1
+  WHERE "ingredient_user"."user_id"=$1 AND "ingredient_id"=$2
   `
-  pool.query(query, [req.params.id]).then(result => {
+  pool.query(query, [req.user.id, req.params.id]).then(result => {
     res.status(200).send(result.rows)
   }).catch(err => {
     res.sendStatus(500)
   })
 });
 
-router.put('/:id', rejectUnauthenticated, (req,res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   const query = `
   UPDATE "ingredient_user" 
   SET "count" = $1
   WHERE "ingredient_user"."ingredient_id"=$2 AND "ingredient_user"."user_id"=$3; 
   `
-  pool.query(query, [req.body.count, req.params.id , req.body.user_id ]).then( result => {
+  pool.query(query, [req.body.count, req.params.id, req.body.user_id]).then(result => {
     res.status(200).send(result.rows)
     console.log('in server');
   }).catch(err => {

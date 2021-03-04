@@ -19,9 +19,22 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    const query = `
+    DELETE FROM "favorites" WHERE "favorites"."user_id"=$1 AND "favorites"."id"=$2;
+    `
+    pool.query(query, [req.user.id, req.params.id]).then(result => {
+        res.send(result.rows)
+        console.log(req.params.id)
+    }).catch(err => {
+        res.sendStatus(500)
+        console.log(err)
+    })
+})
+
 router.get('/', rejectUnauthenticated, (req, res) => {
     const query = `
-        SELECT "recipes"."title","recipes"."poster","recipes"."cooking_directions","recipes"."ingredients_list" FROM "favorites"
+        SELECT "favorites"."id","recipes"."title","recipes"."poster","recipes"."cooking_directions","recipes"."ingredients_list" FROM "favorites"
         JOIN "recipes" ON "recipes"."id"="favorites"."recipe_id"
         JOIN "user" ON "user"."id"="favorites"."user_id"
         WHERE "user_id"=$1;`

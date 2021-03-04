@@ -7,7 +7,8 @@ import Box from '@material-ui/core/Box';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import '../IngredientsPage/Ingredients.css'
+import Swal from 'sweetalert2';
+import '../IngredientsPage/Ingredients.css';
 
 function IngredientForm() {
 
@@ -26,12 +27,26 @@ function IngredientForm() {
             count: newIngredientCount,
         }
         if (!newIngredient) {
-            alert('Please Select An Ingredient To Add');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please Select An Ingredient!',
+            })
             return;
         } else if (!newIngredientCount) {
-            alert('Please Add Amount');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please Add An Amount!',
+            })
             return;
         } else {
+            Swal.fire({
+                icon: 'success',
+                title: 'Ingredient Added!',
+                showConfirmButton: false,
+                timer: 1500
+            })
             dispatch({ type: 'ADD_INGREDIENT', payload: newIngredientAdd });
             setNewIngredient('');
             setNewIngredientCount('')
@@ -46,7 +61,7 @@ function IngredientForm() {
                     value={newIngredient}
                     onChange={(e) => setNewIngredient(e.target.value)}
                     variant="outlined"
-                    style={{width:200,marginRight:5}}
+                    style={{ width: 200, marginRight: 5 }}
                     defaultValue={0}
                 >
                     <InputLabel value={0}>Ingredient Name</InputLabel>

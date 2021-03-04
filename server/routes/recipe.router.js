@@ -3,9 +3,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
 router.get('/', rejectUnauthenticated, (req, res) => {
     const query=`
     SELECT * FROM "recipes"
@@ -19,15 +16,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.send(result.rows)
     }).catch(err => {
         res.sendStatus(500)
-        
-    })
-});
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
+    })
 });
 
 module.exports = router;

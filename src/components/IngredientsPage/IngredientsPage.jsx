@@ -18,7 +18,6 @@ function IngredientsPage() {
 
   const ingredients = useSelector(store => store.ingredients);
 
-  console.log(ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {
