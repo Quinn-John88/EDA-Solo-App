@@ -47,8 +47,8 @@ function FavoriteRecipeList() {
         <div className="favoritesContainer">
             {favorites.map(favorite => {
                 return (
-                    <div key={favorite.id}>
-                        <Card className='recipeCard' onClick={() => handleClick(favorite)}>
+                    <div className='favoriteRecipeDiv' key={favorite.id}>
+                        <Card className='favoriteRecipeCard' onClick={() => handleClick(favorite)}>
                             <img style={{ width: 100, height: 100 }} src={favorite.poster}></img>
                             <h5 style={{ maxWidth: 100 }}>{favorite.title}</h5>
                         </Card>

@@ -30,20 +30,20 @@ function RecipesPage() {
             title: 'Added To Favorites!',
             showConfirmButton: false,
             timer: 1500
-          })
+        })
         dispatch({ type: 'ADD_FAVORITE', payload: recipe.id })
     }
     return (
         <div className="recipeContainer">
             {recipes.map(recipe => {
                 return (
-                    <>
+                    <div  key={recipe.id} className="recipeDiv">
                         <Card className='recipeCard' key={recipe.id} onClick={() => handleClick(recipe)}>
                             <img style={{ width: 100, height: 100 }} src={recipe.poster}></img>
                             <h5 style={{ maxWidth: 100 }}>{recipe.title}</h5>
                         </Card>
                         <IconButton style={{ textAlign: "left" }} onClick={() => addFav(recipe)}><FavoriteIcon /></IconButton>
-                    </>
+                    </div>
                 )
             })}
         </div>
